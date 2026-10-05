@@ -34,19 +34,28 @@ function writeCache(cache) {
   try { localStorage.setItem(CACHE_KEY, JSON.stringify(Object.fromEntries(entries))); } catch { /* storage full or blocked */ }
 }
 
-async function getJson(url) {
-  let res;
-  try {
-    res = await fetch(url, { headers: { Accept: "application/json" } });
-  } catch {
-    throw new LookupError("offline", "Couldn't reach Open Food Facts. Check your connection and try again.");
-  }
-  if (res.status === 429 || res.status === 503) {
-    throw new LookupError("rate-limited", "Open Food Facts is busy right now. Wait a minute, or try a saved sample.");
-  }
-  const text = await res.text();
-  try { return JSON.parse(text); } catch {
-    throw new LookupError("offline", `Open Food Facts returned an unexpected response (HTTP ${res.status}).`);
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+
+// Open Food Facts' "busy" responses (429/503) don't carry CORS headers, so the
+// browser reports them as a network error. Either way, wait briefly and retry once.
+async function getJson(url, { retries = 1, busyMessage } = {}) {
+  for (let attempt = 0; ; attempt++) {
+    let res;
+    try {
+      res = await fetch(url, { headers: { Accept: "application/json" } });
+    } catch {
+      if (attempt < retries) { await sleep(2500); continue; }
+      if (!navigator.onLine) throw new LookupError("offline", "You're offline. Connect and try again, or try a saved sample.");
+      throw new LookupError("rate-limited", busyMessage ?? "Open Food Facts is busy right now. Wait a minute, or try a saved sample.");
+    }
+    if (res.status === 429 || res.status === 503) {
+      if (attempt < retries) { await sleep(2500); continue; }
+      throw new LookupError("rate-limited", busyMessage ?? "Open Food Facts is busy right now. Wait a minute, or try a saved sample.");
+    }
+    const text = await res.text();
+    try { return JSON.parse(text); } catch {
+      throw new LookupError("offline", `Open Food Facts returned an unexpected response (HTTP ${res.status}).`);
+    }
   }
 }
 
@@ -94,6 +103,8 @@ export async function findBetterOptions(product, { country = "united-states" } =
     page_size: "12",
   });
   if (country) params.set("countries_tags", `en:${country}`);
-  const j = await getJson(`${BASE}/api/v2/search?${params}`);
+  const j = await getJson(`${BASE}/api/v2/search?${params}`, {
+    busyMessage: "Open Food Facts search is busy right now. Try again in a minute.",
+  });
   return (j.products ?? []).filter((p) => p.code !== product.code && p.product_name);
 }
