@@ -1,0 +1,169 @@
+{
+ "_about": "Snapshots from Open Food Facts (ODbL; images CC BY-SA) taken 2026-10-04, used when the live API is rate-limited or offline.",
+ "products": {
+  "3017620422003": {
+   "additives_n": 2,
+   "additives_tags": [
+    "en:e322",
+    "en:e322i"
+   ],
+   "brands": "Nutella, Ferrero",
+   "categories_tags": [
+    "en:breakfasts",
+    "en:spreads",
+    "en:sweet-spreads",
+    "en:confectionary-based-spreads"
+   ],
+   "code": "3017620422003",
+   "image_front_small_url": "https://images.openfoodfacts.org/images/products/301/762/042/2003/front_en.879.200.jpg",
+   "ingredients_text": "Sucre, huile de palme, NOISETTES 13%, cacao maigre 7,4%, LAIT écrémé en poudre 6,6%, LACTOSERUM en poudre, émulsifiants: lécithines [SOJA), vanilline. Sans gluten.",
+   "labels_tags": [
+    "en:vegetarian",
+    "en:no-gluten"
+   ],
+   "nova_group": 4,
+   "nutriscore_grade": "e",
+   "product_name": "Nutella",
+   "quantity": "400 g"
+  },
+  "5449000000996": {
+   "additives_n": 2,
+   "additives_tags": [
+    "en:e150d",
+    "en:e338"
+   ],
+   "brands": "Coca-Cola",
+   "categories_tags": [
+    "en:beverages-and-beverages-preparations",
+    "en:beverages",
+    "en:non-alcoholic-beverages",
+    "en:carbonated-drinks",
+    "en:soft-drinks",
+    "en:sodas",
+    "en:colas"
+   ],
+   "code": "5449000000996",
+   "image_front_small_url": "https://images.openfoodfacts.org/images/products/544/900/000/0996/front_en.1129.200.jpg",
+   "ingredients_text": "Agua carbonatada, azúcar, colorante (E-150d), acidulante (ácido fosfórico), aromas naturales (contiene cafeína).",
+   "labels_tags": [
+    "en:made-in-the-eu"
+   ],
+   "nova_group": 4,
+   "nutriscore_grade": "e",
+   "product_name": "Coca-Cola Original",
+   "quantity": "330 ml"
+  },
+  "0016000275287": {
+   "additives_n": 1,
+   "additives_tags": [
+    "en:e340",
+    "en:e340iii"
+   ],
+   "brands": "Cheerios",
+   "categories_tags": [
+    "en:plant-based-foods-and-beverages",
+    "en:plant-based-foods",
+    "en:breakfasts",
+    "en:cereals-and-potatoes",
+    "en:cereals-and-their-products",
+    "en:breakfast-cereals"
+   ],
+   "code": "0016000275287",
+   "image_front_small_url": "https://images.openfoodfacts.org/images/products/001/600/027/5287/front_en.8.200.jpg",
+   "ingredients_text": "Whole grain oats, corn starch, sugar, salt, tripotassium phosphate, vitamin e (mixed tocopherols) added to preserve freshness, vitamins and minerals: calcium carbonate, iron and zinc (mineral nutrients), vitamin c (sodium ascorbate), a b vitamin (niacinamide), vitamin b6 (pyridoxine hydrochloride), vitamin a (palmitate), vitamin b1 (thiamin mononitrate), a b vitamin (folic acid), vitamin b12, vitamin d3",
+   "labels_tags": [
+    "en:kosher",
+    "en:orthodox-union-kosher",
+    "en:vitamin-b12-source"
+   ],
+   "nutriscore_grade": "c",
+   "product_name": "Cheerios",
+   "quantity": "18 oz (510 g)"
+  },
+  "0030000010402": {
+   "additives_n": 0,
+   "additives_tags": [],
+   "brands": "Quaker Oats",
+   "categories_tags": [
+    "en:plant-based-foods-and-beverages",
+    "en:plant-based-foods",
+    "en:breakfasts",
+    "en:cereals-and-potatoes",
+    "en:seeds",
+    "en:cereals-and-their-products",
+    "en:breakfast-cereals",
+    "en:cereal-grains",
+    "en:flakes",
+    "en:cereal-flakes",
+    "en:rolled-flakes",
+    "en:rolled-oats"
+   ],
+   "code": "0030000010402",
+   "image_front_small_url": "https://images.openfoodfacts.org/images/products/003/000/001/0402/front_en.268.200.jpg",
+   "ingredients_text": "whole grain rolled oats",
+   "labels_tags": [
+    "en:kosher",
+    "en:no-artificial-flavors",
+    "en:no-gmos",
+    "en:no-preservatives",
+    "en:source-of-fibre",
+    "en:non-gmo-project",
+    "en:orthodox-union-kosher",
+    "en:whole-grain"
+   ],
+   "nova_group": 1,
+   "nutriscore_grade": "a",
+   "product_name": "Old Fashioned Oats",
+   "quantity": "42 oz"
+  },
+  "0037600138727": {
+   "additives_n": 1,
+   "additives_tags": [
+    "en:e250"
+   ],
+   "brands": "SPAM",
+   "categories_tags": [
+    "en:canned-foods",
+    "en:meats-and-their-products",
+    "en:meats",
+    "en:canned-meats"
+   ],
+   "code": "0037600138727",
+   "image_front_small_url": "https://images.openfoodfacts.org/images/products/003/760/013/8727/front_en.66.200.jpg",
+   "ingredients_text": "pork with ham, salt, water, modified potato starch, sugar, sodium nitrite",
+   "labels_tags": [
+    "en:no-gluten"
+   ],
+   "nova_group": 4,
+   "nutriscore_grade": "d",
+   "product_name": "SPAM Classic",
+   "quantity": "12 oz (340 g)"
+  },
+  "0072250037129": {
+   "additives_n": 0,
+   "additives_tags": [],
+   "brands": "Nature's Own",
+   "categories_tags": [
+    "en:plant-based-foods-and-beverages",
+    "en:plant-based-foods",
+    "en:cereals-and-potatoes",
+    "en:cereals-and-their-products",
+    "en:breads",
+    "en:sliced-breads",
+    "en:wheat-breads"
+   ],
+   "code": "0072250037129",
+   "image_front_small_url": "https://images.openfoodfacts.org/images/products/007/225/003/7129/front_en.159.200.jpg",
+   "ingredients_text": "Whole wheat flour, water, yeast, brown sugar, wheat gluten, 2% or less: salt, expeller pressed canola oil, cultured wheat flour, vinegar, flax seed meal, enzymes, acerola cherry powder",
+   "labels_tags": [
+    "en:no-gmos",
+    "en:non-gmo-project",
+    "en:whole-grain"
+   ],
+   "nova_group": 4,
+   "nutriscore_grade": "a",
+   "product_name": "100% Whole Wheat Bread",
+   "quantity": "20 oz (567 g)"
+  }
+ }
+}

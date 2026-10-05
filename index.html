@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>ANTeater</title>
+  <meta name="description" content="Scan grocery barcodes for a transparent health score, additive warnings and better options. Free and open source." />
+  <meta name="theme-color" content="#1F4D3A" />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml" />
+  <link rel="apple-touch-icon" href="icons/icon-192.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <a class="wordmark" href="#scan" aria-label="ANTeater home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M4 9a3 3 0 0 1 3-3h14l7 10-7 10H7a3 3 0 0 1-3-3z" fill="#fff"/><circle cx="21" cy="16" r="2.2" fill="#1F4D3A"/><path d="M9 12v8M12 12v8M15 12v8" stroke="#1F4D3A" stroke-width="1.8" stroke-linecap="round"/></svg>
+      ANTeater
+    </a>
+  </header>
+
+  <main id="app">
+    <!-- Scan -->
+    <section id="view-scan" class="view" aria-labelledby="scan-h">
+      <h1 id="scan-h" class="view-title">What's in your cart?</h1>
+
+      <div class="viewfinder" id="viewfinder" hidden>
+        <video id="video" playsinline muted></video>
+        <div class="guide" aria-hidden="true"></div>
+        <button class="btn btn-quiet on-video" id="stop-scan" type="button">Stop camera</button>
+      </div>
+
+      <button class="btn btn-primary btn-wide" id="start-scan" type="button">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2M7 8v8M10 8v8M13 8v8M17 8v8"/></svg>
+        Scan a barcode
+      </button>
+
+      <form class="manual" id="manual-form" autocomplete="off">
+        <label for="manual-code">Or type the number under the barcode</label>
+        <div class="row">
+          <input id="manual-code" inputmode="numeric" pattern="[0-9 ]*" placeholder="e.g. 0016000275287" />
+          <button class="btn" type="submit">Look up</button>
+        </div>
+      </form>
+
+      <div class="samples">
+        <h2 class="small-h">Try a saved product</h2>
+        <div class="chips" id="sample-chips"></div>
+      </div>
+
+      <div class="photo-path">
+        <h2 class="small-h">No barcode, or not in the database?</h2>
+        <label class="btn btn-quiet btn-wide" for="label-photo">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h3l2-3h6l2 3h3v11H4z"/><circle cx="12" cy="13" r="3.5"/></svg>
+          Photograph the ingredient list
+        </label>
+        <input id="label-photo" type="file" accept="image/*" capture="environment" hidden />
+        <p class="hint" id="photo-hint">Uses Gemini with your own API key. Add it in Settings.</p>
+      </div>
+
+      <p class="status" id="scan-status" role="status" aria-live="polite"></p>
+    </section>
+
+    <!-- Result -->
+    <section id="view-result" class="view" hidden aria-live="polite"></section>
+
+    <!-- History -->
+    <section id="view-history" class="view" hidden aria-labelledby="hist-h">
+      <h1 id="hist-h" class="view-title">This month</h1>
+      <div class="summary" id="summary"></div>
+      <ol class="history" id="history-list"></ol>
+      <div class="row gap">
+        <button class="btn btn-quiet" id="export-csv" type="button">Download CSV</button>
+        <button class="btn btn-quiet" id="export-json" type="button">Download JSON</button>
+        <button class="btn btn-quiet danger" id="clear-history" type="button">Clear history</button>
+      </div>
+    </section>
+
+    <!-- Settings -->
+    <section id="view-settings" class="view" hidden aria-labelledby="set-h">
+      <h1 id="set-h" class="view-title">Settings</h1>
+
+      <form class="panel" id="key-form" autocomplete="off">
+        <h2>AI features (optional)</h2>
+        <p>Reading ingredient photos and explaining scores uses Google Gemini with <strong>your own</strong> free API key from
+          <a href="https://aistudio.google.com/apikey" target="_blank" rel="noopener">Google AI Studio</a>.
+          The key is saved only in this browser and sent only to Google.</p>
+        <label for="gemini-key">Gemini API key</label>
+        <div class="row">
+          <input id="gemini-key" type="password" autocomplete="off" spellcheck="false" placeholder="Paste your key" />
+          <button class="btn" type="submit">Save key</button>
+        </div>
+        <p class="status" id="key-status" role="status" aria-live="polite"></p>
+        <button class="btn btn-quiet danger" id="forget-key" type="button" hidden>Remove key from this device</button>
+      </form>
+
+      <div class="panel">
+        <h2>Better options</h2>
+        <label for="region">Look for alternatives sold in</label>
+        <select id="region">
+          <option value="united-states">United States</option>
+          <option value="canada">Canada</option>
+          <option value="united-kingdom">United Kingdom</option>
+          <option value="india">India</option>
+          <option value="">Anywhere</option>
+        </select>
+      </div>
+
+      <div class="panel">
+        <h2>How the score works</h2>
+        <p>Out of 100: nutrition counts for 60 (from the Nutri-Score grade), additives for 30, and organic certification for 10.
+          Any high-risk additive caps the score at 49. If a part is unknown, the other parts are scaled up so missing data
+          doesn't drag a product down.</p>
+        <p><a href="https://github.com/shivacheruvu/ANTeater/blob/main/docs/METHODOLOGY.md" target="_blank" rel="noopener">Full method and sources</a></p>
+        <p class="fine">Product data from <a href="https://world.openfoodfacts.org" target="_blank" rel="noopener">Open Food Facts</a> (ODbL), images CC BY-SA.
+          Informational only, not medical advice.</p>
+      </div>
+    </section>
+  </main>
+
+  <nav class="tabs" aria-label="Main">
+    <a href="#scan" data-tab="scan">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2M8 8v8M12 8v8M16 8v8"/></svg>
+      Scan
+    </a>
+    <a href="#history" data-tab="history">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h11l3 3v13H5z"/><path d="M8 10h8M8 14h8M8 18h5"/></svg>
+      History
+    </a>
+    <a href="#settings" data-tab="settings">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg>
+      Settings
+    </a>
+  </nav>
+
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>
