@@ -1,6 +1,6 @@
 // Offline app shell. Product data is cached by the app itself (localStorage);
 // API calls are never cached here.
-const VERSION = "anteater-v1";
+const VERSION = "anteater-v2";
 const SHELL = [
   "./", "index.html", "styles.css", "manifest.webmanifest",
   "src/app.js", "src/score.js", "src/additives.js", "src/off.js", "src/gemini.js", "src/store.js", "src/scanner.js",
